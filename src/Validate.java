@@ -20,13 +20,14 @@ public class Validate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// TODO Auto-generated method stub
-		String username = request.getParameter("username"); // Taken from form 
+		String id = request.getParameter("id"); // Taken from form 
 		String password = request.getParameter("password"); // Taken from form 
 		
 		DatabaseHandler hand = new DatabaseHandler();
-		if(hand.checkLogin(username, password)) {
+		if(hand.checkLogin(id, password)) {
+			System.out.println("Here");
 			HttpSession session = request.getSession();
-			session.setAttribute("username", username);
+			session.setAttribute("id", id);
 			session.setAttribute("password", password);
 			response.sendRedirect(request.getContextPath() + "/student.jsp");
 		}else {

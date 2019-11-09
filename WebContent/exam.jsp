@@ -9,7 +9,7 @@
 <body>
 
 	<%
-		if(session.getAttribute("username")==null)
+		if(session.getAttribute("id")==null)
 			response.sendRedirect("login.html");
 	%>
 	<h1>Hello, Exams Page !</h1>
