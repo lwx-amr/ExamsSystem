@@ -1,3 +1,4 @@
+package DB;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -6,15 +7,14 @@ import java.sql.SQLException;
 
 public class DatabaseHandler {
 
-	String sql = "Select * from users where id=? and password=?";
 	String url = "jdbc:mysql://localhost:3306/examssystem";
 	String username = "examsuser";
 	String password = "User123%";
 	
 	public boolean checkLogin(String id, String ps) {
 		Connection conn = null;
+		String sql = "Select * from users where id=? and password=?";
 	    try {
-	    	System.out.println("ID: " + id + " PS: " + ps);
 	    	Class.forName("com.mysql.jdbc.Driver");	
 	      	conn = DriverManager.getConnection(url, username, password);
 	      	PreparedStatement st =  conn.prepareStatement(sql);
@@ -30,4 +30,24 @@ public class DatabaseHandler {
 	        throw new Error("Problem", e);
 	    }
 	}
+	
+	public boolean checkExam(String id){
+		Connection conn = null;
+	    try {
+	    	String sql = "Select * from students_answers where sid=?";
+	    	Class.forName("com.mysql.jdbc.Driver");	
+	      	conn = DriverManager.getConnection(url, username, password);
+	      	PreparedStatement st =  conn.prepareStatement(sql);
+	      	st.setString(1, id);
+	      	ResultSet rs = st.executeQuery();
+	      	if(rs.next()){
+	      		return true;
+	      	}else {
+	      		return false;
+	      	}
+	    } catch (SQLException | ClassNotFoundException e) {
+	        throw new Error("Problem", e);
+	    }
+	}
+	
 }
