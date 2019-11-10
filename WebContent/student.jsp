@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<%@ page import="DB.DatabaseHandler"%>
-
 <%
 	if(session.getAttribute("id")==null)
 		response.sendRedirect("login.html");
 %>
+
+<%@ page import="DB.DatabaseHandler"%>
 
 <!DOCTYPE html>
 <html>
