@@ -32,7 +32,6 @@ public class Validate extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 			session.setAttribute("password", password);
-			session.setAttribute("before", 1);
 			response.sendRedirect(request.getContextPath() + "/student.jsp");
 		}else {
 			response.sendRedirect(request.getContextPath() + "/login.html");

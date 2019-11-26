@@ -13,7 +13,7 @@ public class DatabaseHandler {
 	String username = "examsuser";
 	String password = "User123%";
 	
-	public Connection openDbConnectio(){
+	public Connection openDbConnection(){
 		Connection con = null;
 	    try {
 	    	Class.forName("com.mysql.jdbc.Driver");	
@@ -25,7 +25,7 @@ public class DatabaseHandler {
 	}
 	
 	public boolean checkLogin(String id, String ps) {
-		Connection con = openDbConnectio();
+		Connection con = openDbConnection();
 		String sql = "Select * from student where sid=? and password=?";
 		try {
 	      	PreparedStatement st =  con.prepareStatement(sql);
@@ -45,7 +45,7 @@ public class DatabaseHandler {
 	}
 	
 	public boolean checkExam(String id){
-		Connection con = openDbConnectio();;
+		Connection con = openDbConnection();;
 	    try {
 	    	String sql = "Select * from students_answers where sid=?";
 	    	PreparedStatement st =  con.prepareStatement(sql);
@@ -64,7 +64,7 @@ public class DatabaseHandler {
 	}
 	
 	public ArrayList<String> getQuestion(){
-		Connection con = openDbConnectio();
+		Connection con = openDbConnection();
 		String sql = "Select * from question";
 	    try {
 	    	ArrayList<String> questions = new ArrayList<String>();
@@ -83,7 +83,6 @@ public class DatabaseHandler {
 	      	
 	      	// Get all answers;
 	      	ArrayList<String> answers = getAnswers(randQ+1);
-	      	System.out.println(answers.toString());
 	      	
 	      	// Add correct answer
 	      	finalOutput.add(answers.get(0));
@@ -103,7 +102,7 @@ public class DatabaseHandler {
 	}
 	
 	public ArrayList<String> getAnswers(int qid){
-		Connection con = openDbConnectio();
+		Connection con = openDbConnection();
 		String sql = "Select * from answer where qid=?";
 	    try {
 	    	ArrayList<String> answers = new ArrayList<String>();
@@ -121,7 +120,7 @@ public class DatabaseHandler {
 	}
 
 	public void submitExam(int sid,String question,String answer){
-		Connection con = openDbConnectio();
+		Connection con = openDbConnection();
 		String sql = "insert into students_answers values(?,?,?)";
 	    try {
 	    	PreparedStatement st =  con.prepareStatement(sql);
@@ -138,7 +137,7 @@ public class DatabaseHandler {
 	}
 
 	private int getAnswerId(String answer) {
-		Connection con = openDbConnectio();
+		Connection con = openDbConnection();
 		String sql = "Select * from answer where text=?";
 	    try {
 	    	PreparedStatement st =  con.prepareStatement(sql);
@@ -154,7 +153,7 @@ public class DatabaseHandler {
 	}
 
 	private int getQuestId(String question) {
-		Connection con = openDbConnectio();
+		Connection con = openDbConnection();
 		String sql = "Select * from question where text=?";
 	    try {
 	    	PreparedStatement st =  con.prepareStatement(sql);

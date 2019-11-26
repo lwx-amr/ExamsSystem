@@ -1,11 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	if(session.getAttribute("id")==null)
-		response.sendRedirect("login.html");
-%>
-
 <%@ page import="DB.DatabaseHandler"%>
+<%
+	String id = "";
+	boolean before=false;
+	if(session.getAttribute("id")!=null){
+		id = (String)session.getAttribute("id");
+		DatabaseHandler hand = new DatabaseHandler();
+		before = hand.checkExam(id);
+	}else{
+		response.sendRedirect("login.html");	
+	}
+%>
 
 <!DOCTYPE html>
 <html>
@@ -35,12 +41,6 @@
 		</style>
 	</head>
 	<body>
-	
-		<%
-			String id = (String)session.getAttribute("id");
-			DatabaseHandler hand = new DatabaseHandler();
-			boolean before = hand.checkExam(id);
-		%>
 		
 		<div class="page">
 			<% if(!before) {%>
